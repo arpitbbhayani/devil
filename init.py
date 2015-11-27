@@ -1,7 +1,9 @@
-from app import config
-from app.db.Datastore import Datastore
+import app
+from app.models.user import User
 
-#
-# Setup Datastore
-#
-datastore = Datastore()
+import pymongo
+
+try:
+    User.create(app.config.YOUR_ID)
+except pymongo.errors.DuplicateKeyError:
+    print 'User %s already exists' % app.config.YOUR_ID

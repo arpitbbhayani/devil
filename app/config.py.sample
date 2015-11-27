@@ -1,0 +1,16 @@
+YOUR_ID = 'xxxxxxxxxx'
+
+MONGODB_URI = 'xxxxxxxxxx'
+
+UPLOAD_FOLDER = 'xxxxxxxxxx'
+ALLOWED_EXTENSIONS = set(['json'])
+
+SECRET_KEY = 'secret-key-is-here'
+
+SUPPORTED_MEDIATYPES = [
+    'image'
+]
+
+SUPPORTED_GENRE = [
+    'love'
+]

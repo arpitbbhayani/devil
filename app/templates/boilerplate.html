@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Flask Template by Arpit Bhayani</title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
+
+    <link rel="stylesheet" href="/static/semantic/dist/semantic.min.css">
+
+    <!-- JS Libs -->
+    <script src="/static/js/lib/jquery-1.11.3.min.js"></script>
+    <script src="/static/semantic/dist/semantic.min.js"></script>
+
+    <!-- UX Styling -->
+    <link rel="stylesheet" href="/static/css/ux.css">
+
+</head>
+
+<body>
+
+    <div id="error-zone" class="ui top sidebar">
+        <div id="error-msg" class="ui negative message header large"></div>
+    </div>
+    <div id="alert-zone" class="ui top sidebar">
+        <div id="alert-msg" class="ui positive message header large"></div>
+    </div>
+    <div class="overlay">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+{% block head %}{% endblock %}
+</html>

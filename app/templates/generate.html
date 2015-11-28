@@ -1,0 +1,24 @@
+{% extends "raw.html" %}
+
+{% block body %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="three wide column">
+    </div>
+    <div class="ten wide column">
+        <div class="ui center aligned basic segment">
+            <div class="ui big label center aligned">
+                Genarating a new API key will make all of your previous keys nonfunctional.
+            </div>
+        </div>
+        <form class="ui form" method="POST" action="{{url_for('pages.generate')}}">
+            <div class="ui action fluid input">
+                <input style="font-family: 'Courier';" type="text" placeholder="" readonly="" id="api_key" value="{% if g.user.api_key %}{{g.user.api_key}}{% endif %}">
+                <button type="submit" class="ui grey button">Generate new API Key</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+{% endblock %}

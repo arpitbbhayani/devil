@@ -17,6 +17,10 @@ class UnsupportedException(DevilException):
     def __init__(self, message, status_code=None, payload=None):
         DevilException.__init__(self, message, status_code, payload)
 
+class AuthorizationException(DevilException):
+    def __init__(self, message, status_code=None, payload=None):
+        DevilException.__init__(self, message, status_code, payload)
+
 class ResourceExhaustException(DevilException):
     def __init__(self, message, status_code=None, payload=None):
         DevilException.__init__(self, message, status_code, payload)

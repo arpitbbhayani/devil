@@ -1,5 +1,52 @@
+function update_pre() {
+    var media_type = $('#media_type').val();
+    var genre = $('#genre').val();
+    var api_key = $('#api_key').val();
+
+    replace_helper = {
+        'media_type': media_type,
+        'genre': genre,
+        'api_key': api_key
+    };
+
+    var URL_TEMPLATE = 'http://speedster.pythonanywhere.com/{{media_type}}/{{genre}}?api_key={{api_key}}'
+
+    $.each($('#code-snippet'), function(index, block) {
+        var restr = "{{" + Object.keys(replace_helper).join('}}|{{')+ "}}";
+        var re = new RegExp(restr, "gi" );
+        var new_content = URL_TEMPLATE.replace(re, function(matched) {
+            matched = matched.slice(2, matched.length-2);
+            return replace_helper[matched];
+        });
+        $(this).text(new_content);
+    });
+}
+
 $(document).ready(function(){
     $('.ui.dropdown').dropdown();
+    $('.menu .item').tab();
+
+    update_pre();
+
+    $('#media_type, #genre').change(function() {
+        update_pre();
+    });
+
+});
+
+$(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+    });
 });
 
 var fileExtentionRange = '.json';

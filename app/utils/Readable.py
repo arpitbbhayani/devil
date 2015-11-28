@@ -18,7 +18,6 @@ def fromBytes(bytes):
         bytes /= 1024.0
         index = index + 1
 
-    print type(bytes)
     if type(bytes) == int or (bytes).is_integer():
         return "%d %s" % (bytes, units[index])
     else:

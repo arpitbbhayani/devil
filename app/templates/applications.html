@@ -1,0 +1,51 @@
+{% extends "raw.html" %}
+
+{% block body %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="row">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div class="ui black large header">
+                <i><span class="ui red">1</span> application(s) are created using our API and counting ...</i>
+            </div>
+            <div class="section ui divider"></div>
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        <i class="very huge cube icon"></i>
+                    </div>
+                    <div class="content">
+                        <a href="/" class="header">Shower my love</a>
+                        <div class="meta">
+                            <span>Author: <a href="http://arpitbbhayani.github.io/">Arpit Bhayani</a></span>
+                        </div>
+                        <div class="description">
+                            <p>Posts romantic photos on a facebook group</p>
+                        </div>
+                        <div class="extra">
+                            Loved this project? Share it on
+                            <a href="/"><i class="large facebook icon"></i></a>
+                            <a href="/"><i class="large fitted twitter icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui grid center aligned" style="padding-top: 30px;">
+    <div class="row">
+        <div class="sixteen wide column">
+            <div class="ui black large header">
+                Did you also create something cool with our API?
+            </div>
+            <a class="ui huge black button" href="{{url_for('pages.help', _anchor='media-types')}}">
+                Share it with us <i class="right arrow icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+{% endblock %}

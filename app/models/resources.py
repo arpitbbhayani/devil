@@ -2,7 +2,9 @@ import app
 from pymongo import MongoClient
 from pymongo.collection import ReturnDocument
 
-from app.models.user import User
+from app.db import db
+from app.models.user import User, LUser
+from app.exceptions import *
 
 client = MongoClient(app.config.MONGODB_URI)
 mdb = client.devil
@@ -20,9 +22,13 @@ class Resources():
         return result.inserted_ids
 
     @staticmethod
-    def fetch(id, media_type, genre):
+    def fetch(api_key, media_type, genre):
         d = '%s.%s' % (media_type, genre)
-        document_seq = User.get_next_seq(id, media_type, genre)
+        user = LUser.query.filter_by(api_key=api_key).first()
+        if user is None:
+            raise AuthorizationException('user is not authorized to do this operation')
+
+        document_seq = User.get_next_seq(user.id, media_type, genre)
         result = mdb[media_type].find_one({'genre': genre, 'seq': document_seq})
         result['_id'] = str(result['_id'])
         return result

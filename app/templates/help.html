@@ -1,0 +1,49 @@
+{% extends "raw.html" %}
+
+{% block body %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="row">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+            <div class="ui black header" id="media-types">
+                Media Types we support
+            </div>
+            <div class="ui top attached secondary pointing tabular menu">
+                <a class="active item" data-tab="image">IMAGE</a>
+            </div>
+            <div class="ui bottom active tab basic segment" data-tab="image">
+                <p>It contains several random image URLs</p>
+                <div class="ui header small">
+                    Sample Response
+                </div>
+                <pre>
+                    <code>
+{
+  "content": {
+    "_id": "5658b79707d8d513578c3b0a",
+    "genre": "love",
+    "image_url": "http://wallpaperswide.com/download/following-wallpaper-1366x768.jpg",
+    "seq": 8
+  },
+  "media_type": "image"
+}
+                    </code>
+                </pre>
+                <div class="ui header small">
+                    Genre Supported
+                </div>
+                <div class="ui ordered list">
+                    <li class="item">
+                        <i><b>love</b></i> : images and wallpapers that showcase love
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+<script src="/static/js/help.js"></script>
+{% endblock %}

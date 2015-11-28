@@ -1,0 +1,68 @@
+<div class="" style="min-height:700px;">
+    <div class="ui grid">
+        <div class="column">
+            <img class="ui centered small image" src="/static/images/randomcliff.png" style="padding-top: 90px;">
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui large header center aligned">
+                    Get <span class="shouldbe">awesome</span> content with one REST API
+                </div>
+            </div>
+        </div>
+        <div class="ui section hidden divider"></div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui large header center aligned">
+                    Designed and developed with <span><i class="heart red icon"></i></span>by <a href="http://arpitbbhayani.github.io/" style="font-family: 'Just Me Again Down Here', cursive;">Arpit</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui section hidden divider"></div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui large header center aligned">
+                    <span>
+                        Sign up and explore <i class="right arrow icon"></i>
+                        <a class="ui huge facebook button" href="{{url_for('pages.oauth_authorize', provider='facebook', next=next_url)}}">
+                            <i class="facebook icon"></i>
+                            Login with Facebook
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="section hidden divider ui"></div>
+    <div class="ui center aligned grid">
+        <div class="column">
+            <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+        </div>
+    </div>
+</footer>
+
+<script>
+var index = 0;
+var wordlist = ['awesome', 'amazing', 'meaningful', 'kickass'],
+randomWordInt;
+
+function changeWord(){
+    randomWordInt = setInterval(randomWord, 3000);
+}
+
+function randomWord() {
+    index  = index + 1;
+    index = index % wordlist.length;
+    var i = index;
+    var shouldBe = wordlist[i];
+    $('.shouldbe').fadeOut('fast', function(){
+        $('.shouldbe').text(shouldBe);
+    });
+    $('.shouldbe').fadeIn('fast');
+}
+changeWord();
+</script>

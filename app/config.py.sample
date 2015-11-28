@@ -1,4 +1,16 @@
-YOUR_ID = 'xxxxxxxxxx'
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+APP_SECRET = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
+
+# facebook
+FACEBOOK_APP_KEY = 'xxxxxxxxxx'
+FACEBOOK_APP_SECRET = 'xxxxxxxxxx'
 
 MONGODB_URI = 'xxxxxxxxxx'
 
@@ -14,3 +26,11 @@ SUPPORTED_MEDIATYPES = [
 SUPPORTED_GENRE = [
     'love'
 ]
+
+# OAuth
+OAUTH_CREDENTIALS = {
+    'facebook': {
+        'id': FACEBOOK_APP_KEY,
+        'secret': FACEBOOK_APP_SECRET
+    }
+}

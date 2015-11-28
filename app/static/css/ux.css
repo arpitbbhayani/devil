@@ -1,0 +1,116 @@
+* {
+    border-radius: 0 !important;
+}
+
+pre {
+    font-family: 'Courier';
+	padding: 0.1em 0.5em 0.3em 0.7em;
+	border-left: 11px solid #ccc;
+    background-color: #F0F0F0;
+	font-size: 12px;
+    color: #555;
+    overflow-x:scroll;
+}
+
+pre.my {
+    font-size: 16px;
+    line-height: 2.5em;
+    white-space: nowrap;
+}
+
+/*
+ * Text effects
+ */
+
+ @import url(http://fonts.googleapis.com/css?family=Josefin+Slab:400,600|Just+Me+Again+Down+Here);
+ .tagline {margin:0 auto; max-width:350px;}
+ .theweb {font-family: 'Josefin Slab', serif; font-weight:600; font-size:1.25em}
+ .shouldbe {border-bottom:2px solid black;font-family: 'Just Me Again Down Here', cursive; padding:0 10px; font-size:30px;}
+
+/*
+ * Colors
+ */
+
+body {
+    background-color: #FFF;
+    word-wrap: break-word;
+    max-height: 100vh;
+}
+
+.white {
+    color: #FFF !important;
+}
+
+i.white {
+    color: #FFF !important;
+}
+
+.menu .buttons .button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.toc {
+    background-color: #444C55;
+    z-index: 20;
+    width: 250px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+#main-content {
+    overflow-x: hidden;
+    z-index: 1;
+    height: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-width: 0px;
+}
+
+.whiteBackground {
+    background-color: #FFF;
+}
+
+.redBackground {
+    background-color: #E03131;
+}
+
+.ui.fixed.borderless.menu {
+    border-top: 5px solid #000000;
+}
+
+.penny-header {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 237px !important;
+    min-height: 35px !important;
+}
+
+.penny-header h2 {
+    font-family: 'Allerta Stencil', sans-serif;
+}
+
+.penny-header a,
+.penny-header a:hover,
+.penny-header a:active {
+    text-decoration: none;
+    color: #000000;
+}
+
+#flashes li {
+    text-align: left;
+    list-style: none;
+}
+
+#msg, #flashes {
+    position: fixed;
+    top: 62px;
+    left: 20%;
+    width: 60%;
+    z-index: 10000;
+}

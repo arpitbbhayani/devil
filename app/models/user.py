@@ -8,7 +8,7 @@ from flask.ext.login import UserMixin
 from app.db import db
 
 
-client = MongoClient(app.config.MONGODB_URI)
+client = MongoClient(app.config.MONGODB_URI, connect=False)
 mdb = client.devil
 
 class LUser(UserMixin, db.Model):

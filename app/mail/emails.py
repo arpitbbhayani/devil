@@ -5,15 +5,14 @@ from app.mail import mail
 
 from app.decorators import async
 
-@async
 def send_async_email(app, msg):
     with app.app.app_context():
         mail.send(msg)
 
-def suggestion_email(name, sender, message):
-    msg = Message('Suggestions mail', sender=sender, recipients=app.config.ADMINS)
+def suggestion_email(name, email, message):
+    msg = Message('Suggestions mail', sender=email, recipients=app.config.ADMINS)
     msg.body = message
-    msg.html = render_template('email/suggestion.html', name=name, sender=sender, message=message)
+    msg.html = render_template('email/suggestion.html', name=name, email=email, message=message)
     send_async_email(app, msg)
 
 

@@ -40,6 +40,9 @@
                 Hi, {{ g.user.fname }} <i class="dropdown icon"></i>
                 <div class="menu">
                     <span class="disabled item">{{ current_user.email }}</span>
+                    <a class="item" href="{{ url_for('pages.user_applications') }}">
+                        <i class="cubes icon"></i> My Applications
+                    </a>
                     <a class="item" href="{{ url_for('pages.generate') }}">
                         <i class="refresh icon"></i> Generate new API Key
                     </a>

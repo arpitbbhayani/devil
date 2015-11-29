@@ -1,0 +1,29 @@
+{% extends "raw.html" %}
+
+{% block body %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="row">
+        <div class="three wide column"></div>
+        <div class="ten wide column">
+            <form class="ui form" method="POST" action="{{url_for('pages.edit_application', application_id=application._id)}}" id="share_form">
+                <div class="field required">
+                    <label>Title</label>
+                    <input type="text" name="title" placeholder="Title for your application" value={{application.title}}>
+                </div>
+                <div class="field required">
+                    <label>Description</label>
+                    <input type="text" name="description" placeholder="One liner description" value="{{application.description}}">
+                </div>
+                <div class="field">
+                    <label>Link</label>
+                    <input type="text" name="link" placeholder="Source code link" value="{{application.link}}">
+                </div>
+                <input type="submit" value="Save" class="ui black button">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+{% endblock %}

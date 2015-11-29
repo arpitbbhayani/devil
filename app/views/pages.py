@@ -10,6 +10,7 @@ from app.oauth import OAuthSignIn
 from app.db import db
 from app.models.user import LUser, User
 from app.models.resources import Resources
+from app.models.applications import Applications
 
 from werkzeug import secure_filename
 
@@ -22,10 +23,91 @@ def index():
     return render_template('index.html', next_url=next_url)
 
 
+@mod.route('/application/<application_id>/edit', methods=["GET", "POST"])
+@login_required
+def edit_application(application_id):
+    next_url = request.args.get('next') or url_for('pages.index')
+    if request.method == 'GET':
+        app = Applications.fetch_one(application_id)
+        if app is None:
+            flash('Invalid application')
+            return redirect(url_for('pages.applications'))
+
+        if app['user']['id'] != g.user.id:
+            flash('Application not found for user')
+            return redirect(url_for('pages.applications'))
+
+        return render_template('application.html', next_url=next_url, application=app)
+    else:
+        application_id = application_id
+        title = request.form.get('title')
+        description = request.form.get('description')
+        link = request.form.get('link')
+
+        if title is None or description is None:
+            flash('Please fill all the mandatory fields.')
+            return redirect(url_for('pages.share'))
+
+        Applications.update(application_id, title, description, link)
+
+        flash("Application details updated successfully")
+        return redirect(url_for('pages.applications'))
+
+
+@mod.route('/application/<application_id>/delete', methods=["GET"])
+@login_required
+def delete_application(application_id):
+    next_url = request.args.get('next') or url_for('pages.index')
+    if request.method == 'GET':
+        app = Applications.fetch_one(application_id)
+
+        if app is None:
+            flash('Invalid application')
+            return redirect(url_for('pages.applications'))
+
+        if app['user']['id'] != g.user.id:
+            flash('Application not found for user')
+            return redirect(url_for('pages.applications'))
+
+        Applications.delete_one(application_id)
+        return redirect(url_for('pages.applications'))
+
+
 @mod.route('/applications', methods=["GET"])
 def applications():
     next_url = request.args.get('next') or url_for('pages.index')
-    return render_template('applications.html', next_url=next_url)
+    apps = Applications.fetch(None)
+    return render_template('applications.html', next_url=next_url, applications=apps)
+
+
+@mod.route('/applications/user', methods=["GET"])
+@login_required
+def user_applications():
+    next_url = request.args.get('next') or url_for('pages.index')
+    user_id = g.user.id
+    apps = Applications.fetch(user_id)
+    return render_template('applications.html', next_url=next_url, applications=apps)
+
+
+@mod.route('/applications/share', methods=["GET", "POST"])
+@login_required
+def share():
+    next_url = request.args.get('next') or url_for('pages.index')
+    if request.method == 'GET':
+        return render_template('share.html', next_url=next_url)
+    else:
+        title = request.form.get('title')
+        description = request.form.get('description')
+        link = request.form.get('link')
+
+        if title is None or description is None:
+            flash('Please fill all the mandatory fields.')
+            return redirect(url_for('pages.share'))
+
+        Applications.create(g.user, title, description, link)
+
+        flash("Your application is successfully published")
+        return redirect(url_for('pages.applications'))
 
 
 @mod.route('/suggestions', methods=["GET"])
@@ -70,10 +152,9 @@ def oauth_callback(provider):
     user = LUser.query.filter_by(email=email).first()
     if not user:
         user = LUser(social_id=social_id, fname=fname, lname=lname, email=email)
-        User.create(user.id)
-
         db.session.add(user)
         db.session.commit()
+        User.create(user.id)
     else:
         user.last_login = datetime.datetime.utcnow()
         db.session.commit()

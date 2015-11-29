@@ -32,6 +32,29 @@ $(document).ready(function(){
         update_pre();
     });
 
+    $('#share_form').form(
+        {
+            on: 'blur',
+            inline : true,
+            fields: {
+                title: {
+                    identifier  : 'title',
+                    rules: [{
+                        type   : 'empty',
+                        prompt : 'Come on, you must have given some name to your application.'
+                    }]
+                },
+                description: {
+                    identifier  : 'description',
+                    rules: [{
+                        type   : 'empty',
+                        prompt : "Won't you like to tell us what your application does?"
+                    }]
+                }
+            }
+        }
+    );
+
 });
 
 $(function() {

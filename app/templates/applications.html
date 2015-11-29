@@ -3,32 +3,39 @@
 {% block body %}
 <div class="ui grid" style="padding-top: 150px;">
     <div class="row">
-        <div class="two wide column"></div>
-        <div class="twelve wide column">
+        <div class="three wide column"></div>
+        <div class="ten wide column">
             <div class="ui black large header">
-                <i><span class="ui red">1</span> application(s) are created using our API and counting ...</i>
+                <i><span class="ui red">{{applications|length}}</span> application(s) are created using our API</i>
             </div>
             <div class="section ui divider"></div>
-            <div class="ui items">
+            <div class="ui divided relaxed items">
+                {% for application in applications %}
                 <div class="item">
                     <div class="ui tiny image">
                         <i class="very huge cube icon"></i>
                     </div>
                     <div class="content">
-                        <a href="/" class="header">Shower my love</a>
+                        {% if application.link %}
+                            <a href="{{application.link}}" class="header">{{application.title}}</a>
+                        {% else %}
+                            <div class="header">{{application.title}}</div>
+                        {% endif %}
                         <div class="meta">
-                            <span>Author: <a href="http://arpitbbhayani.github.io/">Arpit Bhayani</a></span>
+                            <span>Author: <a href="/">{{application.user.fname}} {{application.user.lname}}</a></span>
                         </div>
                         <div class="description">
-                            <p>Posts romantic photos on a facebook group</p>
-                        </div>
-                        <div class="extra">
-                            Loved this project? Share it on
-                            <a href="/"><i class="large facebook icon"></i></a>
-                            <a href="/"><i class="large fitted twitter icon"></i></a>
+                            <p>{{application.description}}</p>
                         </div>
                     </div>
+                    <div class="ui tiny image">
+                        {% if application.user.id == g.user.id %}
+                            <a href="{{url_for('pages.delete_application', application_id=application.id)}}"><i class="large delete icon"></i></a>
+                            <a href="{{url_for('pages.edit_application', application_id=application.id)}}"><i class="large edit icon"></i></a>
+                        {% endif%}
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -39,7 +46,7 @@
             <div class="ui black large header">
                 Did you also create something cool with our API?
             </div>
-            <a class="ui huge black button" href="{{url_for('pages.help', _anchor='media-types')}}">
+            <a class="ui huge black button" href="{{url_for('pages.share')}}">
                 Share it with us <i class="right arrow icon"></i>
             </a>
         </div>

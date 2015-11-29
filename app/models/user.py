@@ -23,7 +23,7 @@ class LUser(UserMixin, db.Model):
     role        = db.Column(db.String(64), nullable=False, default='user')
     created_at  = db.Column(db.DateTime(timezone=True), default=datetime.datetime.utcnow())
     last_login  = db.Column(db.DateTime(timezone=True), default=datetime.datetime.utcnow())
-    api_key     = db.Column(db.String(32), unique=True)
+    api_key     = db.Column(db.String(32))
 
 
 

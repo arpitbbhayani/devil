@@ -1,12 +1,16 @@
 {% extends "raw.html" %}
 
-{% block body %}
+{% block always %}
 <div class="ui grid" style="padding-top: 150px;">
     <div class="row">
         <div class="three wide column"></div>
         <div class="ten wide column">
             <div class="ui black large header">
-                <i><span class="ui red">{{applications|length}}</span> application(s) are created using our API</i>
+                {%- if request.path == url_for('pages.user_applications') %}
+                    <i><span class="ui red">You crated {{applications|length}}</span> application(s) ... we would love if you create more</i>
+                {% else %}
+                    <i><span class="ui red">{{applications|length}}</span> application(s) created</i>
+                {% endif %}
             </div>
             <div class="section ui divider"></div>
             <div class="ui divided relaxed items">
@@ -46,7 +50,7 @@
             <div class="ui black large header">
                 Did you also create something cool with our API?
             </div>
-            <a class="ui huge black button" href="{{url_for('pages.share')}}">
+            <a class="ui huge black button" href="{{url_for('pages.new_application')}}">
                 Share it with us <i class="right arrow icon"></i>
             </a>
         </div>

@@ -5,12 +5,9 @@ app = Flask(__name__)
 
 app.config.from_object('app.config')
 
-# from app import views1
-
 from app.views import pages
 
 app.register_blueprint(pages.mod)
-
 
 from app.exceptions import DevilException
 

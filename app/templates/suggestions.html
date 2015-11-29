@@ -1,0 +1,29 @@
+{% extends "raw.html" %}
+
+{% block body %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="row">
+        <div class="three wide column"></div>
+        <div class="ten wide column">
+            <form class="ui form" method="POST" action="{{url_for('pages.suggestions')}}" id="suggestions_form">
+                <div class="field required">
+                    <label>Your name</label>
+                    <input type="text" name="name" placeholder="Tell us your name so that we can address you">
+                </div>
+                <div class="field required">
+                    <label>Your e-mail</label>
+                    <input type="email" name="email" placeholder="Tell us your email so that we can reply back">
+                </div>
+                <div class="field">
+                    <label>Message</label>
+                    <textarea type="text" name="message" placeholder="Your message here"></textarea>
+                </div>
+                <input type="submit" value="Say Hi!" class="ui black button">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+{% endblock %}

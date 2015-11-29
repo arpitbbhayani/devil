@@ -45,6 +45,16 @@ class Applications():
         return applications
 
     @staticmethod
+    def fetch_all():
+        results = mdb.applications.find({})
+
+        applications = []
+        for result in results:
+            result['id'] = str(result['_id'])
+            applications.append(result)
+        return applications
+
+    @staticmethod
     def fetch_one(application_id):
         application_id = bson.ObjectId(application_id)
         result = mdb.applications.find_one({'_id': application_id})

@@ -6,6 +6,18 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
+# email server
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'xxxxxxxxxx'
+MAIL_PASSWORD = 'xxxxxxxxxx'
+
+# administrator list
+ADMINS = ['xxxxxxxxxx@gmail.com']
+
+
 APP_SECRET = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 # facebook

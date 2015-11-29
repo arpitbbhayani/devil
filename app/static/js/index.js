@@ -55,6 +55,29 @@ $(document).ready(function(){
         }
     );
 
+    $('#suggestions_form').form(
+        {
+            on: 'blur',
+            inline : true,
+            fields: {
+                name: {
+                    identifier  : 'name',
+                    rules: [{
+                        type   : 'empty',
+                        prompt : 'Tell us your name so that we can address you.'
+                    }]
+                },
+                email: {
+                    identifier  : 'email',
+                    rules: [{
+                        type   : 'empty',
+                        prompt : "Tell us your email so that we can reply back"
+                    }]
+                }
+            }
+        }
+    );
+
 });
 
 $(function() {

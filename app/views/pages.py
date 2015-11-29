@@ -8,6 +8,7 @@ from app.exceptions import *
 from app.oauth import OAuthSignIn
 
 from app.db import db
+from app.mail import emails
 from app.models.user import LUser, User
 from app.models.resources import Resources
 from app.models.applications import Applications
@@ -46,7 +47,7 @@ def edit_application(application_id):
 
         if title is None or description is None:
             flash('Please fill all the mandatory fields.')
-            return redirect(url_for('pages.share'))
+            return redirect(url_for('pages.new_application'))
 
         Applications.update(application_id, title, description, link)
 
@@ -73,14 +74,13 @@ def delete_application(application_id):
         return redirect(url_for('pages.applications'))
 
 
-@mod.route('/applications', methods=["GET"])
+@mod.route('/applications/all', methods=["GET"])
 def applications():
-    next_url = request.args.get('next') or url_for('pages.index')
-    apps = Applications.fetch(None)
-    return render_template('applications.html', next_url=next_url, applications=apps)
+    apps = Applications.fetch_all()
+    return render_template('applications.html', applications=apps)
 
 
-@mod.route('/applications/user', methods=["GET"])
+@mod.route('/applications/me', methods=["GET"])
 @login_required
 def user_applications():
     next_url = request.args.get('next') or url_for('pages.index')
@@ -89,9 +89,9 @@ def user_applications():
     return render_template('applications.html', next_url=next_url, applications=apps)
 
 
-@mod.route('/applications/share', methods=["GET", "POST"])
+@mod.route('/application/new', methods=["GET", "POST"])
 @login_required
-def share():
+def new_application():
     next_url = request.args.get('next') or url_for('pages.index')
     if request.method == 'GET':
         return render_template('share.html', next_url=next_url)
@@ -102,7 +102,7 @@ def share():
 
         if title is None or description is None:
             flash('Please fill all the mandatory fields.')
-            return redirect(url_for('pages.share'))
+            return redirect(url_for('pages.new_application'))
 
         Applications.create(g.user, title, description, link)
 
@@ -110,10 +110,18 @@ def share():
         return redirect(url_for('pages.applications'))
 
 
-@mod.route('/suggestions', methods=["GET"])
+@mod.route('/suggestions', methods=["GET", "POST"])
 def suggestions():
-    next_url = request.args.get('next') or url_for('pages.index')
-    return render_template('applications.html', next_url=next_url)
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        emails.suggestion_email(name, email, message)
+        flash('Thank you for contacting us :)')
+        return redirect(url_for('pages.index'))
+    else:
+        return render_template('suggestions.html')
+
 
 @mod.route('/help', methods=["GET"])
 def help():
@@ -155,6 +163,8 @@ def oauth_callback(provider):
         db.session.add(user)
         db.session.commit()
         User.create(user.id)
+
+        emails.welcome_email(user.fname, user.email)
     else:
         user.last_login = datetime.datetime.utcnow()
         db.session.commit()

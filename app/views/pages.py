@@ -182,7 +182,7 @@ def generate():
 
         user_id = g.user.id
         user = LUser.query.get(user_id)
-        user.api_key = api_key
+        user.api_key = g.user.id + api_key
         db.session.commit()
 
         flash('Your API key has been generated.')

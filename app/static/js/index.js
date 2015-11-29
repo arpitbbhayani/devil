@@ -9,7 +9,7 @@ function update_pre() {
         'api_key': api_key
     };
 
-    var URL_TEMPLATE = 'http://speedster.pythonanywhere.com/{{media_type}}/{{genre}}?api_key={{api_key}}'
+    var URL_TEMPLATE = 'http://randomcliff.pythonanywhere.com/{{media_type}}/{{genre}}?api_key={{api_key}}'
 
     $.each($('#code-snippet'), function(index, block) {
         var restr = "{{" + Object.keys(replace_helper).join('}}|{{')+ "}}";

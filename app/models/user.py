@@ -15,7 +15,7 @@ class LUser(UserMixin, db.Model):
     __tablename__ = 'users'
     __table_args__ = {"extend_existing": True}
 
-    id          = db.Column(db.String(24), primary_key=True, default=str(bson.ObjectId()))
+    id          = db.Column(db.String(24), primary_key=True)
     social_id   = db.Column(db.String(64), nullable=False, unique=True)
     fname       = db.Column(db.String(64), nullable=False)
     lname       = db.Column(db.String(64), nullable=False)

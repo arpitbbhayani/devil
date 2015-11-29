@@ -159,7 +159,7 @@ def oauth_callback(provider):
         return redirect(url_for('pages.index'))
     user = LUser.query.filter_by(email=email).first()
     if not user:
-        user = LUser(social_id=social_id, fname=fname, lname=lname, email=email)
+        user = LUser(id=str(bson.ObjectId()), social_id=social_id, fname=fname, lname=lname, email=email)
         db.session.add(user)
         db.session.commit()
         User.create(user.id)

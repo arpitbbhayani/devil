@@ -1,7 +1,7 @@
-{% extends "boilerplate.html" %}
+{% extends "raw.html" %}
 
-{% block content %}
-<div class="ui three column grid" style="padding-top: 50px;">
+{% block body %}
+<div class="ui three column grid" style="padding-top: 150px;">
     <div class="column"></div>
     <form class="ui form" enctype="multipart/form-data" action="{{url_for('pages.add')}}" method="POST">
         <div class="two fields">

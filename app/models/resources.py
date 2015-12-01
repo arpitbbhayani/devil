@@ -22,10 +22,10 @@ class Resources():
                 result = mdb[media_type].insert_one(item)
                 item.pop('_id')
                 inserted_items.append(item)
-                print 'added: ', item
                 total_count = total_count + 1
             except Exception as e:
                 print 'failed: ', item, e.__dict__
+                item.pop('_id')
                 item.pop('seq')
                 failed_items.append(item)
         return inserted_items, failed_items

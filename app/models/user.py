@@ -26,12 +26,11 @@ class LUser(UserMixin, db.Model):
     api_key     = db.Column(db.String(56))
 
 
-
 class User():
     @staticmethod
     def create(id, **kwargs):
         data = kwargs
-        data['_id'] = id
+        data['_id'] = bson.ObjectId(id)
         result = mdb.users.insert_one(data)
         return result.inserted_id
 
@@ -39,7 +38,7 @@ class User():
     def create_resource_entry(id, media_type, genre):
         # Update the user
         d = '%s.%s' % (media_type, genre)
-        result = mdb.users.find_one_and_update({'_id':id, d:{'$exists': False}}, {'$set':{d:0}}, return_document=ReturnDocument.AFTER)
+        result = mdb.users.find_one_and_update({'_id':bson.ObjectId(id), d:{'$exists': False}}, {'$set':{d:0}}, return_document=ReturnDocument.AFTER)
         return result
 
     @staticmethod
@@ -49,11 +48,11 @@ class User():
                 genre_type: count
             }
         }
-        result = mdb.users.update_one({'_id': id}, {'$set': d})
+        result = mdb.users.update_one({'_id': bson.ObjectId(id)}, {'$set': d})
         return result.modified_count
 
-    @staticmethod
-    def get_next_seq(id, media_type, genre):
-        d = '%s.%s' % (media_type, genre)
-        result = mdb.users.find_one_and_update({'_id': id}, {'$inc': {d:1}}, return_document=ReturnDocument.AFTER)
-        return result[media_type][genre]
+    # @staticmethod
+    # def get_next_seq(id, media_type, genre):
+    #     d = '%s.%s' % (media_type, genre)
+    #     result = mdb.users.find_one_and_update({'_id': id}, {'$inc': {d:1}}, return_document=ReturnDocument.AFTER)
+    #     return result[media_type][genre]

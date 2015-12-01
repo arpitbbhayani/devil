@@ -203,8 +203,7 @@ def fetch(media_type, genre):
 
     resource = Resources.fetch(api_key, media_type, genre)
     if resource is None:
-        raise ResourceExhaustException('Resources exhausted for media_type : %s\
-                and genre : %s' % (media_type, genre))
+        raise ResourceExhaustException('Resources exhausted for media_type: %s and genre: %s' % (media_type, genre))
 
     return jsonify(media_type=media_type, content=resource)
 
@@ -246,8 +245,8 @@ def add():
 
         # Add the content of the file into database
         with open(destination, 'rb') as inputfile:
-            j = json.loads(inputfile.read())
-            Resources.update(app.config.YOUR_ID, media_type, genre, j)
+            items = json.loads(inputfile.read())
+            ids, failed_items = Resources.update(media_type, genre, items)
 
         os.remove(destination)
-        return jsonify(hi='Hi')
+        return jsonify(inserted_ids=ids, failed_items=failed_items)

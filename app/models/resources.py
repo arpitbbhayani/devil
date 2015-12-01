@@ -1,4 +1,5 @@
 import app
+import random
 from pymongo import MongoClient
 from pymongo.collection import ReturnDocument
 
@@ -11,15 +12,23 @@ mdb = client.devil
 
 class Resources():
     @staticmethod
-    def update(id, media_type, genre, list_items):
+    def update(media_type, genre, list_items):
         total_count = mdb[media_type].find({'genre': genre}).count()
+        inserted_items, failed_items = [], []
         for item in list_items:
             item['genre'] = genre
             item['seq'] = total_count + 1
-            total_count = total_count + 1
-        result = mdb[media_type].insert_many(list_items)
-        User.create_resource_entry(id, media_type, genre)
-        return result.inserted_ids
+            try:
+                result = mdb[media_type].insert_one(item)
+                item.pop('_id')
+                inserted_items.append(item)
+                print 'added: ', item
+                total_count = total_count + 1
+            except Exception as e:
+                print 'failed: ', item, e.__dict__
+                item.pop('seq')
+                failed_items.append(item)
+        return inserted_items, failed_items
 
     @staticmethod
     def fetch(api_key, media_type, genre):
@@ -28,7 +37,12 @@ class Resources():
         if user is None:
             raise AuthorizationException('user is not authorized to do this operation')
 
-        document_seq = User.get_next_seq(user.id, media_type, genre)
+        # document_seq = User.get_next_seq(user.id, media_type, genre)
+        total_count = mdb[media_type].count()
+        if total_count == 0:
+            return None
+
+        document_seq = random.randint(1, total_count)
         result = mdb[media_type].find_one({'genre': genre, 'seq': document_seq})
-        result['_id'] = str(result['_id'])
+        result.pop('_id')
         return result

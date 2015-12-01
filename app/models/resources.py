@@ -38,7 +38,7 @@ class Resources():
             raise AuthorizationException('user is not authorized to do this operation')
 
         # document_seq = User.get_next_seq(user.id, media_type, genre)
-        total_count = mdb[media_type].count()
+        total_count = mdb[media_type].find({"genre": genre}).count()
         if total_count == 0:
             return None
 

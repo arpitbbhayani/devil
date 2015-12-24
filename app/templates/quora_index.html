@@ -3,34 +3,41 @@
 {% block body %}
 <div class="ui grid" style="padding-top: 150px;">
     <div class="row">
-        <div class="three wide column"></div>
-        <div class="ten wide column">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
             <div class="ui huge form" id="quora_widget_form">
                 <div class="field">
-                    <input type="text" value="" placeholder="Quora Profile URL" id="quora_widget_url"/>
+                    <input type="text" value="" placeholder="Quora profile URL here" id="quora_widget_url"/>
                 </div>
                 <div class="field">
-                    <div class="ui red button huge" id="quora_widget_button">
+                    <div class="ui red button inverted huge" id="quora_widget_button">
                         Preview
                     </div>
                 </div>
             </div>
         </div>
-        <div class="three wide column"></div>
+        <div class="two wide column"></div>
     </div>
 </div>
 <div class="ui grid">
     <div class="row">
-        <div class="three wide column"></div>
-        <div class="ten wide column">
-            <div id="quora_widget_preview" class="ui segment">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div class="ui message">
+                &lt;script&gt; &lt;/script&gt;
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div id="quora_widget_preview" class="ui segment"></div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
 
 {% block head %}
 <script src="/static/js/quora.js"></script>
+<script src="/static/js/quora-widget.js"></script>
 {% endblock %}

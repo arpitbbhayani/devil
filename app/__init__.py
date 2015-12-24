@@ -1,7 +1,9 @@
 from flask import Flask
 from flask import jsonify
+from flask.ext.cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/quora/process": {"origins": "*"}})
 
 app.config.from_object('app.config')
 

@@ -2,7 +2,7 @@ $('#flashes').transition('slide down in', {
     onStart: function() {
         setTimeout(function() {
             $('#flashes').transition('slide down out');
-        }, 5000);
+        }, 3000);
     }
 });
 
@@ -22,7 +22,7 @@ var uiModules = {
                     onComplete: function() {
                         setTimeout(function() {
                             $('#msg').transition('slide down out');
-                        }, 5000);
+                        }, 3000);
                     }
                 });
     },
@@ -40,7 +40,7 @@ var uiModules = {
                     onComplete: function() {
                         setTimeout(function() {
                             $('#msg').transition('slide down out');
-                        }, 5000);
+                        }, 3000);
                     }
                 });
     }

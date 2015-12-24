@@ -7,9 +7,11 @@ app.config.from_object('app.config')
 
 from app.views import pages
 from app.views import conteno
+from app.views import quora
 
 app.register_blueprint(pages.mod)
 app.register_blueprint(conteno.mod, url_prefix='/conteno')
+app.register_blueprint(quora.mod, url_prefix='/quora')
 
 from app.exceptions import DevilException
 

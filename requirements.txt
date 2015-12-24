@@ -10,6 +10,7 @@ Flask-Mail==0.9.1
 Flask-RESTful==0.3.4
 Flask-SQLAlchemy==2.0
 gnureadline==6.3.3
+gunicorn==19.4.1
 ipython==4.0.0
 ipython-genutils==0.1.0
 itsdangerous==0.24

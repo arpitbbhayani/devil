@@ -35,7 +35,7 @@ http://randomcliff.pythonanywhere.com/image/love?api_key={{g.user.api_key}}
 </div>
 <div class="ui center aligned grid">
     <div class="column">
-        <a class="ui huge black button" href="{{url_for('pages.help', _anchor='media-types')}}">
+        <a class="ui huge black button" href="{{url_for('conteno.help', _anchor='media-types')}}">
             Checkout media types we support <i class="right arrow icon"></i>
         </a>
     </div>
@@ -43,7 +43,7 @@ http://randomcliff.pythonanywhere.com/image/love?api_key={{g.user.api_key}}
 {% else %}
 <div class="ui center aligned grid" style="padding-top: 150px;">
     <div class="column">
-        <a class="ui huge black button" href="{{url_for('pages.generate')}}">
+        <a class="ui huge black button" href="{{url_for('conteno.generate')}}">
             Generate an API Key here <i class="right arrow icon"></i>
         </a>
     </div>

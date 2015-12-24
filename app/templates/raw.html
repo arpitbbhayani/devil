@@ -4,7 +4,7 @@
     <title>Random Cliff | Get amazing random content with API</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/ico" href="/static/images/randomcliff.png">
+    <link rel="icon" type="image/ico" href="/static/images/myAvatar.png">
 
     <link rel="stylesheet" href="/static/semantic/dist/semantic.min.css">
 
@@ -16,20 +16,12 @@
 <body>
     <div class="ui fixed borderless menu" style="{% if not g.user.is_authenticated %}background: transparent;{% endif %}">
         <div class="penny-header item">
-            <span><a href="{{url_for('pages.index')}}" class="header black ui"><h2>Random Cliff</h2></a></span>
+            <span><a href="{{url_for('conteno.index')}}" class="header black ui"><h2>Random Cliff</h2></a></span>
         </div>
         <div class="right menu item">
-            <a class="item" href="{{url_for('pages.applications')}}">
-                <i class="cubes icon"></i>
-                Applications
-            </a>
-            <a class="item" href="{{url_for('pages.suggestions')}}">
-                <i class="smile icon"></i>
-                Suggestions?
-            </a>
             {% if not g.user.is_authenticated %}
             <div class="item">
-                <a class="ui huge facebook button" href="{{url_for('pages.oauth_authorize', provider='facebook', next=next_url)}}">
+                <a class="ui huge facebook button" href="{{url_for('conteno.oauth_authorize', provider='facebook', next=next_url)}}">
                     <i class="facebook icon"></i>
                     Login with Facebook
                 </a>
@@ -40,16 +32,16 @@
                 Hi, {{ g.user.fname }} <i class="dropdown icon"></i>
                 <div class="menu">
                     <span class="disabled item">{{ current_user.email }}</span>
-                    <a class="item" href="{{ url_for('pages.user_applications') }}">
+                    <a class="item" href="{{ url_for('conteno.user_applications') }}">
                         <i class="cubes icon"></i> My Applications
                     </a>
-                    <a class="item" href="{{ url_for('pages.generate') }}">
+                    <a class="item" href="{{ url_for('conteno.generate') }}">
                         <i class="refresh icon"></i> Generate new API Key
                     </a>
-                    <a class="item" href="{{ url_for('pages.help') }}">
+                    <a class="item" href="{{ url_for('conteno.help') }}">
                         <i class="help icon"></i> Help
                     </a>
-                    <a class="item" href="{{ url_for('pages.logout') }}">
+                    <a class="item" href="{{ url_for('conteno.logout') }}">
                         <i class="sign out icon"></i> Logout
                     </a>
                 </div>

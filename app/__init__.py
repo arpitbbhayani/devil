@@ -6,8 +6,10 @@ app = Flask(__name__)
 app.config.from_object('app.config')
 
 from app.views import pages
+from app.views import conteno
 
 app.register_blueprint(pages.mod)
+app.register_blueprint(conteno.mod, url_prefix='/conteno')
 
 from app.exceptions import DevilException
 

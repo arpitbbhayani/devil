@@ -10,7 +10,7 @@
                 Genarating a new API key will make all of your previous keys nonfunctional.
             </div>
         </div>
-        <form class="ui form" method="POST" action="{{url_for('pages.generate')}}">
+        <form class="ui form" method="POST" action="{{url_for('conteno.generate')}}">
             <div class="ui action fluid input">
                 <input style="font-family: 'Courier';" type="text" placeholder="" readonly="" id="api_key" value="{% if g.user.api_key %}{{g.user.api_key}}{% endif %}">
                 <button type="submit" class="ui black button">Generate new API Key</button>

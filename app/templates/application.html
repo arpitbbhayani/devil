@@ -5,7 +5,7 @@
     <div class="row">
         <div class="three wide column"></div>
         <div class="ten wide column">
-            <form class="ui form" method="POST" action="{{url_for('pages.edit_application', application_id=application._id)}}" id="share_form">
+            <form class="ui form" method="POST" action="{{url_for('conteno.edit_application', application_id=application._id)}}" id="share_form">
                 <div class="field required">
                     <label>Title</label>
                     <input type="text" name="title" placeholder="Title for your application" value={{application.title}}>

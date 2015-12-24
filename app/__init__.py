@@ -23,13 +23,18 @@ def handle_invalid_usage(error):
 
 
 from flask.ext.login import LoginManager
-from app.models.user import LUser
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 login_manager.login_view = '/login'
 
+from app.models.user import Profile
+
 @login_manager.user_loader
 def load_user(id):
-    return LUser.query.get(id)
+    try:
+        user = Profile.objects.get(id=id)
+    except Profile.DoesNotExist:
+        user = None
+    return user

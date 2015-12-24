@@ -4,11 +4,7 @@ from pymongo import MongoClient
 from pymongo.collection import ReturnDocument
 
 from app.db import db
-from app.models.user import User, LUser
 from app.exceptions import *
-
-client = MongoClient(app.config.MONGODB_URI, connect=False)
-mdb = client.devil
 
 class Resources():
     @staticmethod

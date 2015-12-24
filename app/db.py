@@ -1,4 +1,4 @@
 from app import app
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.mongoengine import MongoEngine
 
-db = SQLAlchemy(app)
+db = MongoEngine(app)

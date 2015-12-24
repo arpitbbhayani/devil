@@ -9,7 +9,6 @@ from app.oauth import OAuthSignIn
 
 from app.db import db
 from app.mail import emails
-from app.models.user import LUser, User
 from app.models.resources import Resources
 from app.models.applications import Applications
 

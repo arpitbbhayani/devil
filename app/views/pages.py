@@ -9,7 +9,7 @@ from app.oauth import OAuthSignIn
 
 from app.db import db
 from app.mail import emails
-from app.models.user import LUser, User
+from app.models.user import Profile
 
 mod = Blueprint('pages', __name__, )
 
@@ -49,17 +49,22 @@ def oauth_callback(provider):
     if social_id is None:
         flash('Authentication failed.')
         return redirect(url_for('pages.index'))
-    user = LUser.query.filter_by(email=email).first()
-    if not user:
-        user = LUser(id=str(bson.ObjectId()), social_id=social_id, fname=fname, lname=lname, email=email)
-        db.session.add(user)
-        db.session.commit()
-        User.create(user.id)
 
-        emails.welcome_email(user.fname, user.email)
+    try:
+        user = Profile.objects.get(email=email)
+    except Profile.DoesNotExist:
+        user = None
+
+    if not user:
+        name = "%s %s" %(fname, lname)
+        user = Profile(social_id=social_id, name=name, email=email,\
+            created_at=datetime.datetime.now())
+        user.save()
+
+        emails.welcome_email(user.name, user.email)
     else:
-        user.last_login = datetime.datetime.utcnow()
-        db.session.commit()
+        user.last_login = datetime.datetime.now()
+        user.save()
 
     login_user(user, True)
     return redirect(next_url)

@@ -1,32 +1,24 @@
 import app
-import bson, datetime
-
-from pymongo import MongoClient
-from pymongo.collection import ReturnDocument
+import bson
 
 from flask.ext.login import UserMixin
 from app.db import db
 
+class Profile(db.Document, UserMixin):
+    social_id   = db.StringField(unique=True)
+    name       = db.StringField(required=True)
+    email       = db.StringField(unique=True, required=True)
+    role        = db.StringField(required=True, default="user")
+    created_at  = db.DateTimeField()
+    last_login  = db.DateTimeField()
+    api_key     = db.StringField(unique=True)
 
-client = MongoClient(app.config.MONGODB_URI, connect=False)
-mdb = client.devil
-
-class LUser(UserMixin, db.Model):
-    __tablename__ = 'users'
-    __table_args__ = {"extend_existing": True}
-
-    id          = db.Column(db.String(24), primary_key=True)
-    social_id   = db.Column(db.String(64), nullable=False, unique=True)
-    fname       = db.Column(db.String(64), nullable=False)
-    lname       = db.Column(db.String(64), nullable=False)
-    email       = db.Column(db.String(64), nullable=True)
-    role        = db.Column(db.String(64), nullable=False, default='user')
-    created_at  = db.Column(db.DateTime(timezone=True), default=datetime.datetime.utcnow())
-    last_login  = db.Column(db.DateTime(timezone=True), default=datetime.datetime.utcnow())
-    api_key     = db.Column(db.String(56))
+    meta = {
+        'collection': 'profiles'
+    }
 
 
-class User():
+class UserStats(db.Document, UserMixin):
     @staticmethod
     def create(id, **kwargs):
         data = kwargs

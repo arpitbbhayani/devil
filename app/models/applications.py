@@ -4,9 +4,6 @@ from pymongo import MongoClient
 from app.db import db
 from app.exceptions import *
 
-client = MongoClient(app.config.MONGODB_URI, connect=False)
-mdb = client.devil
-
 class Applications():
     @staticmethod
     def create(user, title, description, link):

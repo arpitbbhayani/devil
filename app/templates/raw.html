@@ -29,7 +29,7 @@
             {% else %}
             <div class="ui dropdown item">
                 <i class="user icon"></i>
-                Hi, {{ g.user.fname }} <i class="dropdown icon"></i>
+                Hi, {{ g.user.name }} <i class="dropdown icon"></i>
                 <div class="menu">
                     <span class="disabled item">{{ current_user.email }}</span>
                     {% if request.path[:8] == '/conteno' %}

@@ -20,7 +20,8 @@ def index():
 def process():
     profile_page_url = request.args.get('url')
     if not profile_page_url:
-        return ''
+        return render_template('quora-widget/error.html', \
+                error='Invalid Profile URL : ' + profile_page_url)
 
     quora_profile = requests.get(profile_page_url)
 
@@ -35,7 +36,7 @@ def process():
     # Profile Info
     html_profile_info = soup.find(attrs={'class': 'ProfileNameAndSig'})
 
-    profile_pic = soup.find(attrs={'class': 'profile_photo_img'}).get('src')
+    profile_pic = soup.find(attrs={'class': 'profile_photo_img'}).get('data-src')
     profile_name = html_profile_info.find('h1').text.strip()
     profile_bio = html_profile_info.find(attrs={'class': 'rendered_qtext'})\
             .text.strip()
@@ -43,7 +44,8 @@ def process():
     profile_info = {
         'name': profile_name,
         'bio': profile_bio,
-        'pic': profile_pic
+        'img': profile_pic,
+        'link': profile_page_url
     }
 
     # Highlights
@@ -87,44 +89,47 @@ def process():
     soup = BeautifulSoup(quora_answers.text, 'html.parser')
 
     # Answers
-    answers = []
-    html_answers_info = soup.findAll(attrs={'class':'AnswerListItem'})
+    # answers = []
+    # html_answers_info = soup.findAll(attrs={'class':'AnswerListItem'})
+    #
+    # for html_answer_info in html_answers_info:
+    #     question_text = html_answer_info.find(attrs={'class': 'QuestionText'})\
+    #             .text.strip()
+    #
+    #     question_link = html_answer_info.find(attrs={'class': 'QuestionText'})\
+    #             .find(attrs={'class': 'question_link'}).get('href')
+    #
+    #     if not 'quora.com/' in question_link:
+    #         question_link = 'https://www.quora.com' + question_link
+    #
+    #     html_answer_content = html_answer_info.find(attrs={'class': 'answer_content'})
+    #
+    #     print question_text
+    #
+    #     try:
+    #         image_link = html_answer_content.find(attrs={'class': 'truncated_thumbnail_holder'}).find('img').get('master_src')
+    #     except:
+    #         image_link = None
+    #
+    #     answer_parts = []
+    #     html_answer_parts = html_answer_content.findAll(attrs={'class': 'qtext_para'})
+    #     for answer_part in html_answer_parts:
+    #         answer_parts.append(answer_part.text.strip())
+    #
+    #     answers.append({
+    #         'link': question_link,
+    #         'question': question_text,
+    #         'answer': {
+    #             'img': image_link,
+    #             'text': ' '.join(answer_parts)
+    #         }
+    #     })
 
-    for html_answer_info in html_answers_info:
-        question_text = html_answer_info.find(attrs={'class': 'QuestionText'})\
-                .text.strip()
-
-        question_link = html_answer_info.find(attrs={'class': 'QuestionText'})\
-                .find(attrs={'class': 'question_link'}).get('href')
-
-        if not 'quora.com/' in question_link:
-            question_link = 'https://www.quora.com' + question_link
-
-        html_answer_content = html_answer_info.find(attrs={'class': 'answer_content'})
-
-        print question_text
-
-        try:
-            image_link = html_answer_content.find(attrs={'class': 'truncated_thumbnail_holder'}).find('img').get('master_src')
-        except:
-            image_link = None
-
-        answer_parts = []
-        html_answer_parts = html_answer_content.findAll(attrs={'class': 'qtext_para'})
-        for answer_part in html_answer_parts:
-            answer_parts.append(answer_part.text.strip())
-
-        answers.append({
-            'link': question_link,
-            'question': question_text,
-            'answer': {
-                'img': image_link,
-                'text': ' '.join(answer_parts)
-            }
-        })
-
-
-    return render_template('quora-widget/widget.html', \
+    return render_template('quora-widget/card.html', \
             profile_info=profile_info, highlights=highlights, stats=stats, \
-            count_answers=count_answers, count_followers=count_followers,\
-            answers=answers)
+            count_answers=count_answers, count_followers=count_followers)
+
+    # return render_template('quora-widget/widget.html', \
+    #         profile_info=profile_info, highlights=highlights, stats=stats, \
+    #         count_answers=count_answers, count_followers=count_followers,\
+    #         answers=answers)

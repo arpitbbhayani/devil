@@ -1,0 +1,163 @@
+{% extends 'quora-widget/base.html' %}
+
+{% block body %}
+<style>
+.quora-card {
+    -moz-box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    -webkit-box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    max-width: 380px;
+    border: 1px solid #DDD;
+    border-radius: 15px;
+    padding: 12px 12px 8px 8px;
+    margin: 8px 8px 0;
+    background: #fff;
+    color: #555;
+    position: relative;
+}
+.quora-card .header {
+    padding: 8px 7px 9px 60px;
+    min-height: 48px;
+    position: relative;
+}
+.quora-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    border-radius: 4px;
+}
+.quora-card .header strong {
+    display: block;
+    color: #292f33;
+    font-size: 16px;
+    line-height: 1.6;
+}
+.quora-card .header a {
+    text-decoration: none;
+    display: block;
+    color: #292f33;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.quora-card .follow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 8px 4px 7px;
+    color: #FFF !important;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 14px;
+    background-color: #B92B27;
+}
+
+.quora-card ul {
+    font-size: 12px;
+    color: #505050;
+    list-style-type: none;
+    margin-left: 20px;
+    margin-top: 5px;
+    padding: 0;
+    zoom: 1;
+}
+
+.quora-card .highlights {
+    width: 100%;
+    display: inline-block;
+    padding-top: 7px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.quora-card .highlights strong {
+    display: block;
+    color: #353535;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.quora-card .primary strong,
+.quora-card .stats strong {
+    display: block;
+}
+.quora-card .primary ul,
+.quora-card .stats ul {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #707070;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #eee;
+    zoom: 1;
+}
+
+.quora-card .primary li:first-child,
+.quora-card .stats li:first-child {
+    border-left: 0;
+    padding-left: 0;
+}
+
+.quora-card .primary li,
+.quora-card .stats li {
+    float: left;
+    padding: 4px 18px;
+}
+
+.quora-card .footer {
+    width: 100%;
+    display: inline-block;
+    padding-top: 7px;
+    font-size: 11px;
+    text-align: right;
+    border-top: 1px solid #eee;
+}
+
+</style>
+
+<div class="quora-card">
+    <div class="header">
+        <a class="avatar" href="{{profile_info.link}}" target="_top">
+            <img src="{{profile_info.img}}">
+            <strong>{{profile_info.name}}</strong>
+            <span>{{profile_info.bio}}</span>
+        </a>
+        <a class="follow" href="{{profile_info.link}}" target="_top">Follow</a>
+    </div>
+    <div class="primary">
+        <ul>
+            <li><strong>{{count_answers}}</strong>ANSWERS</a></li>
+            <li><strong>{{count_followers}}</strong>FOLLOWERS</a></li>
+        </ul>
+    </div>
+    {% if highlights %}
+    <div class="highlights">
+        <strong>Highlights</strong>
+        <ul>
+            {% for highlight in highlights %}
+                <li>{{highlight.title}} in {{highlight.detail}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if stats %}
+    <div class="stats">
+        <ul>
+            {% for stat in stats %}
+            <li><strong>{{stat.detail}}</strong>{{stat.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="footer"><a href="http://arpitbbhayani.github.io/about-me" target="_top">Created by Arpit</a></div>
+</div>
+{% endblock %}

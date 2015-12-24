@@ -1,8 +1,10 @@
 aniso8601==1.1.0
 appnope==0.1.0
+beautifulsoup4==4.4.1
 blinker==1.4
 decorator==4.0.2
 Flask==0.10.1
+Flask-Cors==2.1.2
 Flask-Login==0.3.2
 Flask-Mail==0.9.1
 Flask-RESTful==0.3.4

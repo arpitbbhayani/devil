@@ -18,6 +18,11 @@ def index():
     next_url = request.args.get('next') or url_for('pages.index')
     return render_template('index.html', next_url=next_url)
 
+@mod.route('/login', methods=["GET"])
+def login():
+    next_url = request.args.get('next') or url_for('pages.index')
+    return render_template('login.html', next_url=next_url)
+
 @mod.route('/logout')
 def logout():
     logout_user()

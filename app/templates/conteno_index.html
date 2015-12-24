@@ -1,0 +1,51 @@
+{% extends "raw.html" %}
+
+{% block body %}
+{% if g.user.api_key %}
+<div class="ui grid" style="padding-top: 150px;">
+    <div class="row">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+            <div class="ui black header">
+                Do a HTTP GET on the following URL
+            </div>
+            <pre class="my">
+http://randomcliff.pythonanywhere.com/conteno/&lt;media_type&gt;/&lt;genre&gt;?api_key=&lt;api_key&gt;
+            </pre>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+            <div class="ui black header">
+                For example
+            </div>
+            <pre class="my">
+http://randomcliff.pythonanywhere.com/conteno/image/love?api_key={{g.user.api_key}}
+            </pre>
+        </div>
+    </div>
+</div>
+<div class="ui center aligned grid">
+    <div class="column">
+        <a class="ui huge black button" href="{{url_for('conteno.help', _anchor='media-types')}}">
+            Checkout media types we support <i class="right arrow icon"></i>
+        </a>
+    </div>
+</div>
+{% else %}
+<div class="ui center aligned grid" style="padding-top: 150px;">
+    <div class="column">
+        <a class="ui huge black button" href="{{url_for('conteno.generate')}}">
+            Generate an API Key here <i class="right arrow icon"></i>
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}

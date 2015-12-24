@@ -1,55 +1,50 @@
 {% extends "raw.html" %}
 
-{% block intro %}
-    {% include 'intro.html' %}
-{% endblock %}
-
 {% block body %}
-{% if g.user.api_key %}
-<div class="ui grid" style="padding-top: 150px;">
-    <div class="row">
-        <div class="three wide column">
+<div class="" style="min-height:700px;">
+    <div class="ui section hidden divider"></div>
+    <div class="ui grid">
+        <div class="column">
+            <img class="ui centered small image" src="/static/images/myAvatar.png" style="padding-top: 90px;">
         </div>
-        <div class="ten wide column">
-            <div class="ui black header">
-                Do a HTTP GET on the following URL
+    </div>
+    <div class="ui grid">
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui hidden divider"></div>
+                <div class="ui large header center aligned">
+                    <a class="ui huge teal button" href='/conteno'>
+                        Conteno
+                    </a>
+                    <a class="ui huge red button center aligned" href='/quora'>
+                        Quora - Widget
+                    </a>
+                </div>
+                <div class="ui hidden divider"></div>
             </div>
-            <pre class="my">
-http://randomcliff.pythonanywhere.com/&lt;media_type&gt;/&lt;genre&gt;?api_key=&lt;api_key&gt;
-            </pre>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="three wide column">
-        </div>
-        <div class="ten wide column">
-            <div class="ui black header">
-                For example
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui large header center aligned">
+                    Designed and developed with <span><i class="heart red icon"></i></span>by <a href="http://arpitbbhayani.github.io/about-me" style="font-family: 'Just Me Again Down Here', cursive;">Arpit</a>
+                </div>
             </div>
-            <pre class="my">
-http://randomcliff.pythonanywhere.com/image/love?api_key={{g.user.api_key}}
-            </pre>
         </div>
+        {% if not g.user.is_authenticated %}
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui large header center aligned">
+                    <span>
+                        Sign up and explore <i class="right arrow icon"></i>
+                        <a class="ui huge facebook button" href="{{url_for('pages.oauth_authorize', provider='facebook', next=next_url)}}">
+                            <i class="facebook icon"></i>
+                            Login with Facebook
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
-<div class="ui center aligned grid">
-    <div class="column">
-        <a class="ui huge black button" href="{{url_for('conteno.help', _anchor='media-types')}}">
-            Checkout media types we support <i class="right arrow icon"></i>
-        </a>
-    </div>
-</div>
-{% else %}
-<div class="ui center aligned grid" style="padding-top: 150px;">
-    <div class="column">
-        <a class="ui huge black button" href="{{url_for('conteno.generate')}}">
-            Generate an API Key here <i class="right arrow icon"></i>
-        </a>
-    </div>
-</div>
-{% endif %}
-{% endblock %}
-
-{% block head %}
 {% endblock %}

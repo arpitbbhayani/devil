@@ -55,15 +55,16 @@ def process():
     highlights = []
 
     html_highlights_info = soup.find(attrs={'class': 'Highlights'})
-    html_highlights = html_highlights_info.findAll('div', recursive=False)
+    if html_highlights_info:
+        html_highlights = html_highlights_info.findAll('div', recursive=False)
 
-    for html_highlight in html_highlights:
-        highlights.append({
-                'title': html_highlight.find(attrs={'class': 'title'})\
-                        .text.strip(),
-                'detail': html_highlight.find(attrs={'class': 'detail'})\
-                        .text.strip()
-        })
+        for html_highlight in html_highlights:
+            highlights.append({
+                    'title': html_highlight.find(attrs={'class': 'title'})\
+                            .text.strip(),
+                    'detail': html_highlight.find(attrs={'class': 'detail'})\
+                            .text.strip()
+            })
 
     # Stats
     stats = []

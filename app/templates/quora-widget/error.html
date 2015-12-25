@@ -1,0 +1,64 @@
+{% extends 'quora-widget/base.html' %}
+
+{% block body %}
+<style>
+.quora-card {
+    text-align: left !important;
+    -moz-box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    -webkit-box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.18);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    max-width: 380px;
+    border: 1px solid #DDD;
+    border-radius: 2px !important;
+    padding: 12px 12px 8px 8px;
+    margin: 8px 8px 0;
+    background: #fff;
+    color: #555;
+    position: relative;
+    line-height: 1.4285em !important;
+}
+
+.quora-card .header {
+    padding: 8px 7px 9px 60px;
+    min-height: 48px;
+    position: relative;
+}
+
+.quora-card .header strong {
+    display: block;
+    color: #292f33;
+    font-size: 16px;
+    line-height: 1.6em !important;
+}
+
+.quora-card .header a {
+    text-decoration: none;
+    display: block;
+    color: #292f33;
+    font-size: 13px;
+    line-height: 1.2 !important;
+}
+
+.quora-card .footer {
+    width: 100%;
+    display: inline-block;
+    padding-top: 7px;
+    font-size: 11px;
+    text-align: right;
+    border-top: 1px solid #eee;
+}
+
+</style>
+
+<div class="quora-card">
+    <div class="header">
+        <strong>{{error}}</strong>
+        <span>{{message}}</span>
+    </div>
+    <div class="footer"><a href="http://arpitbbhayani.github.io/about-me" target="_top">Created by Arpit</a></div>
+</div>
+{% endblock %}

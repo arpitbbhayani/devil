@@ -19,15 +19,16 @@ def index():
 @mod.route('/process', methods=["GET"])
 def process():
     profile_page_url = request.args.get('url')
-    if not profile_page_url:
+
+    if not profile_page_url or '//www.quora.com/profile/' not in profile_page_url:
         return render_template('quora-widget/error.html', \
-                error='Invalid Profile URL : ' + profile_page_url)
+                error='Invalid Profile URL : ' + profile_page_url, message='Please provide a correct profile URL. It looks something link this "https://www.quora.com/profile/Arpit-Bhayani"')
 
     quora_profile = requests.get(profile_page_url)
 
     if quora_profile.status_code != 200:
         return render_template('quora-widget/error.html', \
-                error=quora_profile.text)
+                error='Profile does not exists', message="Unable to fetch any page for this profile.")
 
     answers_page_url = profile_page_url.strip('/') + '/answers'
 

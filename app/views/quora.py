@@ -38,8 +38,11 @@ def process():
 
     profile_pic = soup.find(attrs={'class': 'profile_photo_img'}).get('data-src')
     profile_name = html_profile_info.find('h1').text.strip()
-    profile_bio = html_profile_info.find(attrs={'class': 'rendered_qtext'})\
+    try:
+        profile_bio = html_profile_info.find(attrs={'class': 'rendered_qtext'})\
             .text.strip()
+    except:
+        profile_bio = None
 
     profile_info = {
         'name': profile_name,

@@ -1,5 +1,4 @@
 import app, bson
-from pymongo import MongoClient
 
 from app.db import db
 from app.exceptions import *

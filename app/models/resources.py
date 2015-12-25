@@ -1,7 +1,5 @@
 import app
 import random
-from pymongo import MongoClient
-from pymongo.collection import ReturnDocument
 
 from app.db import db
 from app.exceptions import *

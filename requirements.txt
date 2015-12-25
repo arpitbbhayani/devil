@@ -10,7 +10,6 @@ Flask-Mail==0.9.1
 flask-mongoengine==0.7.4
 Flask-RESTful==0.3.4
 Flask-WTF==0.12
-gnureadline==6.3.3
 gunicorn==19.4.1
 ipython==4.0.0
 ipython-genutils==0.1.0

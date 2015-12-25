@@ -17,7 +17,7 @@ def suggestion_email(name, email, message):
 
 
 def welcome_email(name, email):
-    msg = Message('Welcome to Random Cliff', sender='arpit.b.bhayani@gmail.com', recipients=[email])
+    msg = Message('Welcome to Codeville', sender='arpit.b.bhayani+codeville@gmail.com', recipients=[email])
     msg.body = render_template('email/welcome.html', name=name)
     msg.html = render_template('email/welcome.html', name=name)
     send_async_email(app, msg)

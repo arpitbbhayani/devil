@@ -21,6 +21,6 @@ function quora_widget(url, element_id) {
             }
         }
     }
-    xmlhttp.open("GET", "http://randomcliff.pythonanywhere.com/quora/process?url=" + url, true);
+    xmlhttp.open("GET", "http://codeville.org.in/quora/process?url=" + url, true);
     xmlhttp.send();
 }

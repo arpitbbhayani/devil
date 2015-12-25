@@ -10,7 +10,7 @@
                     <input type="text" value="" placeholder="Quora profile URL here" id="quora_widget_url"/>
                 </div>
                 <div class="field">
-                    <div class="ui red button inverted huge" id="quora_widget_button">
+                    <div class="ui red button inverted large" id="quora_widget_button">
                         Preview
                     </div>
                 </div>
@@ -23,7 +23,16 @@
     <div class="row">
         <div class="two wide column"></div>
         <div class="twelve wide column">
-            <div id="quora_widget_preview"></div>
+            <div class="ui basic segment" id="quora_widget_preview"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="two wide column"></div>
+        <div class="twelve wide column">
+            <div id="steps" class="ui basic segment" style="display: none;">
+                Copy-paste the lines below in your website.
+                <pre></pre>
+            </div>
         </div>
     </div>
 </div>
@@ -31,5 +40,4 @@
 
 {% block head %}
 <script src="/static/js/quora.js"></script>
-<script src="/static/js/quora-widget.js"></script>
 {% endblock %}

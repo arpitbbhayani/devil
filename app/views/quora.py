@@ -42,7 +42,7 @@ def process():
         profile_bio = html_profile_info.find(attrs={'class': 'rendered_qtext'})\
             .text.strip()
     except:
-        profile_bio = None
+        profile_bio = ''
 
     profile_info = {
         'name': profile_name,

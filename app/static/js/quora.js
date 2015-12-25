@@ -9,7 +9,7 @@ $(document).ready(function() {
             $('#steps').show();
             $('#steps pre').html('\
 &lt;<span class="tag">div</span> type=<span class="str">"card"</span> quora-profile=<span class="str">"'+ url +'"</span>&gt;&lt;/<span class="tag">div</span>&gt;\n\
-&lt;<span class="tag">script</span> src=<span class="str">"/static/js/quora-widget.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;\
+&lt;<span class="tag">script</span> src=<span class="str">"http://codeville.org.in/static/js/quora-widget.min.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;\
 ');
         }).always(function(){
             $('#quora_widget_preview').removeClass('loading');

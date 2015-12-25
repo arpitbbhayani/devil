@@ -1,13 +1,10 @@
 function quora_widget(url, element) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     } else {
-        // code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
             if(xmlhttp.status == 200){
@@ -22,7 +19,6 @@ function quora_widget(url, element) {
             }
         }
     }
-
     xmlhttp.open("GET", "http://codeville.org.in/quora/process?url=" + url, true);
     xmlhttp.send();
 }

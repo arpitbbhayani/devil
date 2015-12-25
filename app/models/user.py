@@ -11,7 +11,7 @@ class Profile(db.Document, UserMixin):
     role        = db.StringField(required=True, default="user")
     created_at  = db.DateTimeField()
     last_login  = db.DateTimeField()
-    api_key     = db.StringField(unique=True)
+    api_key     = db.StringField()
 
     meta = {
         'collection': 'profiles'

@@ -11,7 +11,6 @@ from app.exceptions import *
 mod = Blueprint('quora', __name__)
 
 @mod.route('/', methods=["GET"])
-@login_required
 def index():
     return render_template('quora_index.html')
 

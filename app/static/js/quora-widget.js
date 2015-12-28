@@ -19,7 +19,7 @@ function quora_widget(url, element) {
             }
         }
     }
-    xmlhttp.open("GET", "http://codeville.org.in/quora/process?url=" + url, true);
+    xmlhttp.open("GET", "http://codeville.org.in/quoracard/process?url=" + url, true);
     xmlhttp.send();
 }
 

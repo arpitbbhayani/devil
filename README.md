@@ -1,3 +1,3 @@
 # Random Cliff - The codeville website
 
-the place where I host live demo of my open source codes
+Hosted on AWS infra. I host all live demos of my open source projects here

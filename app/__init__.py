@@ -13,9 +13,12 @@ from app.views import pages
 from app.views import conteno
 from app.views import quora
 
+from app.quora_widget_api.app.quora import views as quora_api
+
 app.register_blueprint(pages.mod)
 app.register_blueprint(conteno.mod, url_prefix='/conteno')
 app.register_blueprint(quora.mod, url_prefix='/quora')
+app.register_blueprint(quora_api.mod, url_prefix='/quoracard')
 
 from app.exceptions import DevilException
 

@@ -1,4 +1,14 @@
-function quora_widget(url, element) {
+var WIDGET_HOST = "http://localhost:5000";
+
+
+function quora_widget(width, height, type, url, element) {
+    var template = '<iframe width="' + width + '" height="' + height + '"'
+                   + ' src="' + WIDGET_HOST + '/quoracard/process?url=' +
+                   url + '" FRAMEBORDER=0></iframe>';
+    element.innerHTML = template;
+}
+
+function quora_plain(url, element){
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -8,7 +18,6 @@ function quora_widget(url, element) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
             if(xmlhttp.status == 200){
-                console.log(element);
                 element.innerHTML = xmlhttp.responseText;
             }
             else if(xmlhttp.status == 400) {
@@ -19,7 +28,7 @@ function quora_widget(url, element) {
             }
         }
     }
-    xmlhttp.open("GET", "http://codeville.org.in/quoracard/process?url=" + url, true);
+    xmlhttp.open("GET", WIDGET_HOST + "/quoracard/process?url=" + url, true);
     xmlhttp.send();
 }
 
@@ -28,7 +37,22 @@ window.addEventListener("DOMContentLoaded", function() {
     for(var i = 0; i < quora_profile_elements.length; i++) {
         var quora_profile_element = quora_profile_elements[i];
         var url = quora_profile_element.getAttribute('quora-profile');
+        var load_iframe = quora_profile_element.getAttribute('iframe');
+        var width = quora_profile_element.getAttribute('widget-width');
+        var height = quora_profile_element.getAttribute('widget-height');
+        var type = quora_profile_element.getAttribute('type');
 
-        quora_widget(url, quora_profile_element);
+        if(load_iframe && load_iframe == 'yes') {
+            if(width == null) {
+                if(type=='card') { width = '400px'; }
+            }
+            if(height == null) {
+                if(type=='card') { height = '300px'; }
+            }
+            quora_widget(width, height, type, url, quora_profile_element);
+        }
+        else {
+            quora_plain(url, quora_profile_element);
+        }
     }
 }, false);

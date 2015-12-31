@@ -5,7 +5,7 @@ from flask.ext.cors import CORS
 app = Flask(__name__)
 app.debug = True
 
-cors = CORS(app, resources={r"/quora/process": {"origins": "*"}})
+cors = CORS(app, resources={r"/quoracard/process": {"origins": "*"}})
 
 app.config.from_object('app.config')
 

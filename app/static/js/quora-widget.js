@@ -1,4 +1,4 @@
-var WIDGET_HOST = "http://localhost:5000";
+var WIDGET_HOST = "http://codeville.org.in";
 
 
 function quora_widget(width, height, type, url, element) {

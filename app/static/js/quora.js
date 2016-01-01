@@ -4,7 +4,7 @@ $(document).ready(function() {
         $('#quora_widget_preview').addClass('loading');
         $('#steps').addClass('loading');
 
-        $.get('http://codeville.org.in/quora/process', {url: url}, function(result) {
+        $.get('http://codeville.org.in/quoracard/process', {url: url}, function(result) {
             $('#quora_widget_preview').html(result);
             $('#steps').show();
             $('#steps pre').html('\
